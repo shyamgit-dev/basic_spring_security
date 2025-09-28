@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>403 Forbidden</title>
+  <title>404 Not Found</title>
   <style>
-    :root{--bg:#fafbfd;--card:#ffffff;--muted:#6b7280;--accent:#ef4444}
+    :root{--bg:#fafbfd;--card:#ffffff;--muted:#6b7280;--accent:#3b82f6}
     *{box-sizing:border-box}
     body{margin:0;background:linear-gradient(180deg,var(--bg),#eef2ff);font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;color:#111827;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
     .card{background:var(--card);border-radius:12px;padding:34px;max-width:760px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.08);display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:center}
-    .code{width:100px;height:100px;border-radius:12px;background:linear-gradient(180deg,#fff5f5,#fff1f0);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent);font-size:28px;border:1px solid rgba(239,68,68,0.08)}
+    .code{width:100px;height:100px;border-radius:12px;background:linear-gradient(180deg,#eff6ff,#dbeafe);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent);font-size:28px;border:1px solid rgba(59,130,246,0.1)}
     h1{margin:0;font-size:22px}
     p{margin:6px 0;color:var(--muted)}
     .actions{margin-top:14px;display:flex;gap:10px}
@@ -22,17 +22,17 @@
 </head>
 <body>
   <main class="card" role="main" aria-labelledby="error-title">
-    <div class="code" aria-hidden="true">403</div>
+    <div class="code" aria-hidden="true">404</div>
     <div>
-      <h1 id="error-title">Access denied — Forbidden</h1>
-      <p>You don't have permission to access this page.</p>
+      <h1 id="error-title">Page Not Found</h1>
+      <p>The page you are looking for doesn’t exist or has been moved.</p>
 
       <div class="actions" role="group" aria-label="Helpful actions">
         <a href="/" class="btn btn-primary">Go to Home</a>
         <a href="/contact" class="btn btn-ghost">Contact Support</a>
       </div>
 
-      <p class="hint">If you think this is an error, please contact the site administrator or try logging in with a different account.</p>
+      <p class="hint">Check the URL for errors, or return to the home page.</p>
     </div>
   </main>
 </body>

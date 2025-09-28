@@ -1,5 +1,6 @@
 package com.sam.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,18 +17,20 @@ public class HomeController {
 	}
 	
 	@GetMapping("/user/home")
-	public String handleUser(Model model)
+	public String handleUser(Model model,Authentication authentication)
 	{
+		String username = authentication.getName();
 		model.addAttribute("title","User Page");
-		model.addAttribute("message", "Welcome user");
+		model.addAttribute("username",username);
 		return "user";
 	}
 	
 	@GetMapping("/admin/home")
-	public String handleAdmin(Model model)
+	public String handleAdmin(Model model,Authentication authentication)
 	{
-		model.addAttribute("title","Admin Page");
-		model.addAttribute("message", "Welcome Admin");
+		String username = authentication.getName();
+		model.addAttribute("title","User Page");
+		model.addAttribute("username",username);
 		return "admin";
 	}
 

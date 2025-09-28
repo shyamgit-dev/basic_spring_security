@@ -43,7 +43,6 @@ public class SecurityConfig {
 		return provider;
 	}
 	
-	
 	@Bean
 	public PasswordEncoder passwordEncoder()
 	{
@@ -70,5 +69,4 @@ public class SecurityConfig {
 		
 		return new InMemoryUserDetailsManager(user,admin);
 	}*/
-
 }

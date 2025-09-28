@@ -1,14 +1,12 @@
 package com.sam.service;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import com.sam.dao.MyUserDao;
 import com.sam.model.MyUser;
 
@@ -28,9 +26,14 @@ public class MyUserDetailsService implements UserDetailsService {
 		return User.builder()
 				   .username(myUser.getUsername())
 				   .password(myUser.getPassword())
-				   .roles(myUser.getRole())
+				   .roles(getRoles(myUser))
 				   .build();
 				
 	}
-
+	
+	private String[] getRoles(MyUser myUser)
+	{
+		if(myUser==null) return new String[]{"USER"};
+		return myUser.getRole().split(",");
+	}
 }
