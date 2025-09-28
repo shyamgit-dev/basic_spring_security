@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --accent: #3b82f6;
+      --muted: #6b7280;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      background: linear-gradient(180deg, var(--bg), #eef2ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #111827;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 32px 40px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    h2 {
+      margin: 0 0 18px;
+      font-size: 24px;
+      color: #111827;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    input, select {
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 15px;
+      width: 100%;
+    }
+    button {
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+    .message {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .error { color: #dc2626; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>User Registration</h2>
+    <form th:action="@{/register}" method="post" th:object="${user}">
+      <input type="text" th:field="*{username}" placeholder="Username" required />
+      <input type="password" th:field="*{password}" placeholder="Password" required />
+      
+      <select th:field="*{role}" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="ROLE_USER">User</option>
+        <option value="ROLE_ADMIN">Admin</option>
+      </select>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <!-- Messages -->
+    <p th:if="${param.error}" class="message error">Registration failed. Try again.</p>
+    <p th:if="${param.success}" class="message success">Registration successful! Please <a th:href="@{/login}">login</a>.</p>
+  </div>
+</body>
+</html>

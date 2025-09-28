@@ -5,13 +5,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.sam.service.AuthenticationSuccessHandler;
 import com.sam.service.MyUserDetailsService;
 
 @Configuration
@@ -26,12 +26,16 @@ public class SecurityConfig {
 	{
 		return httpSecurity.csrf(Customizer->Customizer.disable())
 				           .authorizeHttpRequests(request->{
-				        	   request.requestMatchers("/","/api/**").permitAll()
+				        	   request.requestMatchers("/","/api/**","/register/**").permitAll()
 				        	          .requestMatchers("/user/**").hasAnyRole("USER","ADMIN")
 				        	          .requestMatchers("/admin/**").hasRole("ADMIN")
 				        	          .anyRequest().authenticated();
-				           }).formLogin(Customizer.withDefaults())
-				             .build();
+				           }).formLogin(Customizer->{
+				        	   Customizer.loginPage("/login")
+				        	             .successHandler(new AuthenticationSuccessHandler())
+				        	             .permitAll();
+				           })
+				           .build();
 	}
 	
 	@Bean

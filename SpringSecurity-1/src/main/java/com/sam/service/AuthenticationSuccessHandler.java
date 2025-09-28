@@ -1,0 +1,42 @@
+package com.sam.service;
+
+import java.io.IOException;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+/* 
+ * This is class Basically used for Setting default target URL
+ * If User logged In it must redirect to user's Page or vice-versa
+ */
+
+public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws ServletException, IOException {
+		
+		boolean isAdmin = authentication.getAuthorities().stream()
+		              .anyMatch(GrantedAuthority->GrantedAuthority.getAuthority().equals("ROLE_ADMIN"));
+		              
+		if(isAdmin)
+		{
+			setDefaultTargetUrl("/admin/home");
+		}
+		else
+		{
+			setDefaultTargetUrl("/user/home");
+		}
+		
+		setAlwaysUseDefaultTargetUrl(true);
+		
+		super.onAuthenticationSuccess(request, response, authentication);
+	}
+	
+	
+
+}
